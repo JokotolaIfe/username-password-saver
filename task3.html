@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Username and Password Storage</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+     <style>
+      html, body {
+      display: flex;
+      justify-content: center;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 15px;
+      }
+
+      .cont {
+      border: 5px solid #f1f1f1;
+      min-width: 400px
+      }
+
+      input[type=text], input[type=password] {
+      width: 100%;
+      padding: 16px 8px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      }
+
+      /* button {
+      background-color: #8ebf42;
+      color: white;
+      padding: 14px 0;
+      margin: 10px 0;
+      border: none;
+      cursor: grabbing;
+      width: 100%;
+      } */
+
+      h1 {
+      text-align:center;
+      font-size:18;
+      }
+
+      button:hover {
+      opacity: 0.8;
+      }
+
+      .formcontainer {
+      text-align: left;
+      margin: 24px 50px 12px;
+      }
+
+      .container {
+      padding: 16px 0;
+      text-align:left;
+      background: white
+      }
+      .account-type, .gender {
+      margin: 15px 0;
+      }
+      input[type=radio] {
+      display: none;
+      }
+      label#icon {
+      margin: 0;
+      border-radius: 5px 0 0 5px;
+      }
+      label.radio {
+      position: relative;
+      display: inline-block;
+      padding-top: 4px;
+      margin-right: 20px;
+      text-indent: 30px;
+      overflow: visible;
+      cursor: pointer;
+      }
+      label.radio:before {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #1c87c9;
+      }
+      label.radio:after {
+      content: "";
+      position: absolute;
+      width: 9px;
+      height: 4px;
+      top: 8px;
+      left: 4px;
+      border: 3px solid #fff;
+      border-top: none;
+      border-right: none;
+      transform: rotate(-45deg);
+      opacity: 0;
+      }
+      input[type=radio]:checked + label:after {
+      opacity: 1;
+      }
+      input[type=text], input[type=password] {
+      width: calc(100% - 57px);
+      height: 36px;
+      margin: 13px 0 0 -5px;
+      padding-left: 10px; 
+      border-radius: 0 5px 5px 0;
+      border: solid 1px #cbc9c9; 
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #fff; 
+      }
+      input[type=password] {
+      margin-bottom: 15px;
+      }
+      #icon {
+      display: inline-block;
+      padding: 9.3px 15px;
+      box-shadow: 1px 2px 5px rgba(0,0,0,.09); 
+      background: #8ebf42;
+      color: #fff;
+      text-align: center;
+      }
+      .btn-block {
+      margin-top: 10px;
+      text-align: center;
+      }
+      button {
+      width: 100%;
+      padding: 10px 0;
+      margin: 10px auto;
+      border-radius: 5px; 
+      border: none;
+      background: #8ebf42; 
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      cursor: pointer;
+      }
+      button:hover {
+      background: #acc784;
+      
+      }
+    </style>
+  
+
+  <script>
+   let saveFile = () => {
+    	
+      // Get the data from each element on the form.
+    const name = document.getElementById('username');
+    const password = document.getElementById('password');
+      
+    alert('Your Password is'+' '+password.value+' '+'Is it correct?')
+
+
+      // This variable stores all the data.
+      let data = 
+          'Userame: ' + name.value + ' \r\n ' + 
+          'Password: ' + password.value + ' \r\n ';
+      
+      // Convert the text to BLOB.
+      const textToBLOB = new Blob([data], { type: 'text/plain' });
+      const sFileName = 'formdetails.txt';	   // The file to save the data.
+
+      let newLink = document.createElement("a");
+      newLink.download = sFileName;
+
+      if (window.webkitURL != null) {
+          newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+      }
+      else {
+          newLink.href = window.URL.createObjectURL(textToBLOB);
+          newLink.style.display = "none";
+          document.body.appendChild(newLink);
+      }
+
+      newLink.click(); 
+  }
+  </script>
+
+  </head>
+  <body>
+    <div class="cont">
+
+      <h1 style="margin: 4%">Text Storage</h1>
+      <div class="formcontainer">
+      <hr/>
+      <form action="/">
+        <label id="icon" for="name"><i class="fas fa-user"></i></label>
+        <input type="text" name="username" id="username" value="" placeholder="username" required/>
+        <label id="icon" for="name"><i class="fas fa-unlock-alt"></i></label>
+        <input type="password" name="password" id="password" value="" placeholder="password" required/>
+        <hr>
+      </form>
+
+      <button type="submit" onclick="saveFile()">Save </button>
+      
+    </div>
+
+    <a href="task2.html"> <button style="background-color: rgb(19, 18, 18)" type="submit">GO BACK</button> </a>
+
+  </body>
+</html>
